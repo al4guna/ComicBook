@@ -5,12 +5,13 @@ import { FaList } from 'react-icons/fa';
 import { Header } from '../../components/Header';
 import { ItemComic } from '../../components/ItemComic';
 import { Section, Information, Title, Options, Button } from './styled.js';
+import { Loading } from '../../components/Loading';
 
 import { ISSUES_URL } from '../../utils/const.js';
 
 const Home = () => {
-	
 	const [mode, setMode] = useState(true)
+	const [loading, setLoading] = useState(false);
 	const [comics, setComics] = useState([]);
 
 	const handleModeList = () => {
@@ -22,8 +23,19 @@ const Home = () => {
 	}
 
 	useEffect(() => {
-		 
+		try {
+			setLoading(true)
+			fetch(ISSUES_URL)
+				.then(response => response.json())
+				.then(json => {
+					setComics(json.results)
+					setLoading(false)
+				})
+		}catch(e) {
+			console.log(e)
+		}
 	}, [])
+
 	const colorList = mode ? "#000" : "#7d7d7d" ;
 	const colorGrid = !mode ? "#000" : "#7d7d7d";
 	return(
@@ -38,10 +50,11 @@ const Home = () => {
 				</Information>
 			</Header>
 			<Section>
+			{ loading && <Loading />}
 			{
-			[1,2,3,4,5,6,7,8,9].map((item, key)=> {
-				return <ItemComic mode={mode} key={key}/>
-			})
+				comics.map((item, key)=> {	
+					return <ItemComic {...item}  mode={mode} key={key} />
+				})
 			}
 			</Section>
 		</section>

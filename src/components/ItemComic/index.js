@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Item, Visual, Information, Image, Title, Date } from './styled.js';
 
 export const ItemComic = (props) => {
-	const URL_IMG = "https://www.ecured.cu/images/thumb/1/1e/Deadpool-2.jpg/1200px-Deadpool-2.jpg"
 	const mode = props.mode.toString();
+	const { name, image, date_added, issue_number } = props
+
+	let id = props.api_detail_url.split("/")[5]
 	return(
-		<Item display={mode}>
+		<Item display={mode} to={`/detail/${id}`}>
 			<Visual display={mode}>
-				<Image src={URL_IMG} alt="imagen"/>
+				<Image src={image.original_url} alt="imagen"/>
 			</Visual>
 			<Information display={mode}>
-				<Title>Deadpool: Secret Agent Deadpool #3 </Title>
-				<Date>Octubre 03, 2018</Date>
+				<Title>{name} #{issue_number}</Title>
+				<Date>{date_added}</Date>
 			</Information>
 		</Item>
 	)

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'
 
-export const Item = styled.div`
+export const Item = styled(Link)`
+	text-decoration: none;
 	background: #fff;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
@@ -11,16 +13,36 @@ export const Item = styled.div`
 	height: 340px;
 	display: ${props => props.display === "true" ? 'flex': 'inline-block'};
 	width: ${props => props.display === "true" ? '100%' : '30%'};
+
+	@media (max-width: 670px) {
+		width: ${props => props.display === "true" ? '100%' : '42%'};
+	}
+
+	@media (max-width: 500px) {
+		width: ${props => props.display === "true" ? '100%' : '42%'};
+		height: 250px;
+	}
+
 `
 
 export const Visual = styled.div`
 	height: ${props => props.display === "true" ? '100%' : '80%'};
 	width: ${props => props.display === "true" ? '40%': '100%'};
+
+	@media (max-width: 500px) {
+		width: ${props => props.display === "true" ? '45%': '100%'};
+		height: ${props => props.display === "true" ? '100%' : '60%'};
+	}
 `
 
 export const Information = styled.div`
 	height: ${props => props.display === "true" ? '100%' : '20%'};
 	width: ${props => props.display === "true" ? '80%' : '100%'};
+
+	@media (max-width: 500px) {
+		width: ${props => props.display === "true" ? '65%': '100%'};
+		height: ${props => props.display === "true" ? '100%' : '40%'};
+	}
 `
 
 export const Image = styled.img`
@@ -36,6 +58,7 @@ export const Title = styled.p`
 	max-height: 50%;
 	text-overflow: ellipsis;
     overflow: hidden;
+	color: #000;
 `
 
 export const Date = styled.p`
