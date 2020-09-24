@@ -15,7 +15,7 @@ const jsRule = {
 
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     devServer: {
 		historyApiFallback: true,
         contentBase: path.join(__dirname, 'dist')
